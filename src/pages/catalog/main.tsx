@@ -1,10 +1,10 @@
-import PlaceCard from '../../components/place-card/place-card.tsx';
+import {PlaceCard} from '../../components/place-card/place-card.tsx';
 
 type CatalogProps = {
   placesCount: number;
 }
 
-function Catalog({placesCount}: CatalogProps): JSX.Element {
+export function Main({placesCount}: CatalogProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -111,5 +111,3 @@ function Catalog({placesCount}: CatalogProps): JSX.Element {
     </div>
   );
 }
-
-export default Catalog;
