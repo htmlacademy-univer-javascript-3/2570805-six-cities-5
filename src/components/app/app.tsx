@@ -1,4 +1,4 @@
-import {Main} from '../../pages/catalog/main.tsx';
+import {Main} from '../../pages/main/main.tsx';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
 import {Login} from '../../pages/login/login.tsx';
 import {Favorites} from '../../pages/favorites/favorites.tsx';
