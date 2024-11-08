@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 import {AppRoutes} from '../../consts.ts';
 
-export function NotFound(): JSX.Element {
+export function NotFoundPage(): JSX.Element {
   return (
     <section style={{textAlign: 'center'}}>
       <h1>404 Not Found</h1>

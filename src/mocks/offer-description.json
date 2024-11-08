@@ -1,0 +1,51 @@
+{
+  "id": "3dfb4c8d-7444-46a4-8f5b-ce80ad0cffbf",
+  "title": "Perfectly located Castro",
+  "description": "I rent out a very sunny and bright apartment only 7 minutes walking distance to the metro station. The apartment has a spacious living room with a kitchen, one bedroom and a bathroom with mit bath. A terrace can be used in summer.",
+  "type": "apartment",
+  "price": 294,
+  "images": [
+    "https://14.design.htmlacademy.pro/static/hotel/16.jpg",
+    "https://14.design.htmlacademy.pro/static/hotel/13.jpg",
+    "https://14.design.htmlacademy.pro/static/hotel/9.jpg",
+    "https://14.design.htmlacademy.pro/static/hotel/4.jpg",
+    "https://14.design.htmlacademy.pro/static/hotel/10.jpg",
+    "https://14.design.htmlacademy.pro/static/hotel/8.jpg"
+  ],
+  "city": {
+    "name": "Paris",
+    "location": {
+      "latitude": 48.85661,
+      "longitude": 2.351499,
+      "zoom": 13
+    }
+  },
+  "location": {
+    "latitude": 48.868610000000004,
+    "longitude": 2.342499,
+    "zoom": 16
+  },
+  "goods": [
+    "Air conditioning",
+    "Washing machine",
+    "Fridge",
+    "Towels",
+    "Coffee machine",
+    "Wi-Fi",
+    "Dishwasher",
+    "Heating",
+    "Baby seat",
+    "Cable TV",
+    "Breakfast"
+  ],
+  "host": {
+    "isPro": true,
+    "name": "Angelina",
+    "avatarUrl": "https://14.design.htmlacademy.pro/static/host/avatar-angelina.jpg"
+  },
+  "isPremium": false,
+  "isFavorite": false,
+  "rating": 2.6,
+  "bedrooms": 5,
+  "maxAdults": 9
+}
