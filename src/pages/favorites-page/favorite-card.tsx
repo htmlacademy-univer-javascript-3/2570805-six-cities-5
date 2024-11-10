@@ -1,8 +1,8 @@
 import {OfferPreview} from '../../types/offer.ts';
-import {PremiumLabel} from '../../components/premium-label.tsx';
+import {PremiumMark} from '../../components/premium-mark/premium-mark.tsx';
 import {AppRoutes} from '../../consts.ts';
 import {Link} from 'react-router-dom';
-import {OfferPreviewInfo} from '../../components/offer-preview-info.tsx';
+import {OfferPreviewInfo} from '../../components/offer-preview-info/offer-preview-info.tsx';
 
 type FavoriteCardProps = {
   favorite: OfferPreview;
@@ -13,7 +13,7 @@ export function FavoriteCard({favorite}: FavoriteCardProps) {
 
   return (
     <article className="favorites__card place-card">
-      <PremiumLabel isPremium={favorite.isPremium}/>
+      <PremiumMark isPremium={favorite.isPremium} className="place-card"/>
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <Link to={offerDescriptionUrl}>
           <img className="place-card__image" src={favorite.previewImage} width="150" height="110" alt="Place image"/>

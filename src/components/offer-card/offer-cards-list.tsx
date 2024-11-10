@@ -3,15 +3,17 @@ import {OfferCard} from './offer-card.tsx';
 
 type OfferCardsListProps = {
   offerPreviews: OfferPreview[];
-  setActiveOfferPreview: (id: string | null) => void;
+  setActiveOfferPreview?: (id: string | null) => void;
+  className: string;
+  itemClassName: string;
 }
 
-export function OfferCardsList({offerPreviews, setActiveOfferPreview}: OfferCardsListProps): JSX.Element {
+export function OfferCardsList({offerPreviews, setActiveOfferPreview, className, itemClassName}: OfferCardsListProps): JSX.Element {
   return (
-    <div className="cities__places-list places__list tabs__content">
+    <div className={className}>
       {
         offerPreviews.map((offerPreview) =>
-          <OfferCard key={offerPreview.id} offerPreview={offerPreview} setActiveOfferPreview={setActiveOfferPreview}/>)
+          <OfferCard key={offerPreview.id} offerPreview={offerPreview} setActiveOfferPreview={setActiveOfferPreview} className={itemClassName}/>)
       }
     </div>
   );

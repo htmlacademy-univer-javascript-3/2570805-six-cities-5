@@ -29,7 +29,7 @@ export type OfferDescription = OfferBase & {
   maxAdults: number;
 }
 
-export type OfferComment = {
+export type OfferReview = {
   id: string;
   date: string;
   user: User;
