@@ -6,7 +6,7 @@ import {OfferPreviewInfo} from '../offer-preview-info.tsx';
 
 type OfferCardProps = {
   offerPreview: OfferPreview;
-  setActiveOfferPreview: (id: string) => void;
+  setActiveOfferPreview: (id: string | null) => void;
 }
 
 export function OfferCard({offerPreview, setActiveOfferPreview}: OfferCardProps): JSX.Element {
@@ -15,8 +15,12 @@ export function OfferCard({offerPreview, setActiveOfferPreview}: OfferCardProps)
     setActiveOfferPreview(offerPreview.id);
   }
 
+  function handleOnMouseLeave() {
+    setActiveOfferPreview(null);
+  }
+
   return (
-    <article className="cities__card place-card" onMouseOver={handleOnMouseOver}>
+    <article className="cities__card place-card" onMouseOver={handleOnMouseOver} onMouseLeave={handleOnMouseLeave}>
       <PremiumLabel isPremium={offerPreview.isPremium}/>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={offerDescriptionUrl}>

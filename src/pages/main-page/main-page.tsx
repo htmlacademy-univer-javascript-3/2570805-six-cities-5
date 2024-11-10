@@ -3,13 +3,14 @@ import {OfferCardsList} from '../../components/offer-card/offer-cards-list.tsx';
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoutes} from '../../consts.ts';
+import {Map} from '../../components/map/map.tsx';
 
 type MainPageProps = {
   offerPreviews: OfferPreview[];
 }
 
 export function MainPage({offerPreviews}: MainPageProps): JSX.Element {
-  const [, setActiveOfferPreview] = useState<string | null>(null);
+  const [activeOfferPreviewId, setActiveOfferPreviewIdId] = useState<string | null>(null);
 
   return (
     <div className="page page--gray page--main">
@@ -100,10 +101,12 @@ export function MainPage({offerPreviews}: MainPageProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <OfferCardsList offerPreviews={offerPreviews} setActiveOfferPreview={setActiveOfferPreview}/>
+              <OfferCardsList offerPreviews={offerPreviews} setActiveOfferPreview={setActiveOfferPreviewIdId}/>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <Map city={offerPreviews[0].city} offers={offerPreviews} activeOfferPreviewId={activeOfferPreviewId}/>
+              </section>
             </div>
           </div>
         </div>

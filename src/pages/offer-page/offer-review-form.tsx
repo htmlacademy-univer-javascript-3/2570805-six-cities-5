@@ -13,13 +13,13 @@ export function OfferReviewForm() {
   const [formData, setFormData] = useState<{rating: number | null; review: string}>({'rating': null, 'review': ''});
   const isValid = formData.rating !== null && formData.review.length >= MIN_REVIEW_LENGTH && formData.review.length <= MAX_REVIEW_LENGTH;
 
-  function handleReviewChange(e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) {
-    const {name, value} = e.currentTarget;
+  function handleReviewChange(evt: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) {
+    const {name, value} = evt.currentTarget;
     setFormData({...formData, [name]: value});
   }
 
-  function handleFormSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
+  function handleFormSubmit(evt: FormEvent<HTMLFormElement>) {
+    evt.preventDefault();
     // eslint-disable-next-line no-console
     console.log(formData);
   }

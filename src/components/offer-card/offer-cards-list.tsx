@@ -3,7 +3,7 @@ import {OfferCard} from './offer-card.tsx';
 
 type OfferCardsListProps = {
   offerPreviews: OfferPreview[];
-  setActiveOfferPreview: (id: string) => void;
+  setActiveOfferPreview: (id: string | null) => void;
 }
 
 export function OfferCardsList({offerPreviews, setActiveOfferPreview}: OfferCardsListProps): JSX.Element {
