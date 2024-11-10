@@ -2,6 +2,7 @@ import {OfferReviewForm} from './offer-review-form.tsx';
 import {Link} from 'react-router-dom';
 import {AppRoutes} from '../../consts.ts';
 import {OfferComment, OfferDescription, OfferPreview} from '../../types/offer.ts';
+import {Map} from '../../components/map/map.tsx';
 
 type OfferPageProps = {
   offerDescription: OfferDescription;
@@ -190,7 +191,9 @@ export function OfferPage({offerDescription, offerComments, nearOfferPreviews}: 
               </section>
             </div>
           </div>
-          <section className="offer__map map"></section>
+          <section className="offer__map map">
+            <Map city={nearOfferPreviews[0].city} offers={nearOfferPreviews} activeOfferPreviewId={null}/>
+          </section>
         </section>
         <div className="container">
           <section className="near-places places">

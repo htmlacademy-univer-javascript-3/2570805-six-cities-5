@@ -1,5 +1,6 @@
 import {Location} from './location.ts';
 import {User} from './user.ts';
+import {City} from './city.ts';
 
 export type OfferType = 'apartment' | 'room' | 'hotel';
 
@@ -8,10 +9,7 @@ export type OfferBase = {
   title: string;
   type: OfferType;
   price: number;
-  city: {
-    name: string;
-    location: Location;
-  };
+  city: City;
   location: Location;
   isFavorite: boolean;
   isPremium: boolean;

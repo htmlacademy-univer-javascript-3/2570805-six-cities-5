@@ -1,9 +1,9 @@
-import {MainPage} from '../../pages/main/main-page.tsx';
+import {MainPage} from '../../pages/main-page/main-page.tsx';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import {LoginPage} from '../../pages/login/login-page.tsx';
-import {FavoritesPage} from '../../pages/favorites/favorites-page.tsx';
-import {OfferPage} from '../../pages/offer/offer-page.tsx';
-import {NotFoundPage} from '../../pages/not-found/not-found-page.tsx';
+import {LoginPage} from '../../pages/login-page/login-page.tsx';
+import {FavoritesPage} from '../../pages/favorites-page/favorites-page.tsx';
+import {OfferPage} from '../../pages/offer-page/offer-page.tsx';
+import {NotFoundPage} from '../../pages/not-found-page/not-found-page.tsx';
 import {PrivateRoute} from '../private-route/private-route.tsx';
 import {AppRoutes} from '../../consts.ts';
 import {OfferComment, OfferDescription, OfferPreview} from '../../types/offer.ts';
@@ -16,10 +16,12 @@ type AppScreenProps = {
 }
 
 export function App({offerPreviews, offerDescription, favorites, offerComments}: AppScreenProps): JSX.Element {
+  const amsterdamOfferPreviews = offerPreviews.filter(o => o.city.name === 'Amsterdam');
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoutes.Root} element={<MainPage offerPreviews={offerPreviews}/>}/>
+        <Route path={AppRoutes.Root} element={<MainPage offerPreviews={amsterdamOfferPreviews}/>}/>
         <Route path={AppRoutes.Login} element={<LoginPage/>}/>
         <Route path={AppRoutes.Favorites}
           element={
@@ -28,7 +30,7 @@ export function App({offerPreviews, offerDescription, favorites, offerComments}:
             </PrivateRoute>
           }
         />
-        <Route path={AppRoutes.Offer} element={<OfferPage offerDescription={offerDescription} offerComments={offerComments} nearOfferPreviews={offerPreviews}/>}/>
+        <Route path={AppRoutes.Offer} element={<OfferPage offerDescription={offerDescription} offerComments={offerComments} nearOfferPreviews={amsterdamOfferPreviews.slice(0, 3)}/>}/>
         <Route path="*" element={<NotFoundPage/>}/>
       </Routes>
     </BrowserRouter>
