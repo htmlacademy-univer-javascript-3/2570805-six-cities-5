@@ -6,16 +6,16 @@ import {OfferPage} from '../../pages/offer-page/offer-page.tsx';
 import {NotFoundPage} from '../../pages/not-found-page/not-found-page.tsx';
 import {PrivateRoute} from '../private-route/private-route.tsx';
 import {AppRoutes} from '../../consts.ts';
-import {OfferComment, OfferDescription, OfferPreview} from '../../types/offer.ts';
+import {OfferReview, OfferDescription, OfferPreview} from '../../types/offer.ts';
 
 type AppScreenProps = {
   offerPreviews: OfferPreview[];
   offerDescription: OfferDescription;
   favorites: OfferPreview[];
-  offerComments: OfferComment[];
+  offerReviews: OfferReview[];
 }
 
-export function App({offerPreviews, offerDescription, favorites, offerComments}: AppScreenProps): JSX.Element {
+export function App({offerPreviews, offerDescription, favorites, offerReviews}: AppScreenProps): JSX.Element {
   const amsterdamOfferPreviews = offerPreviews.filter(o => o.city.name === 'Amsterdam');
 
   return (
@@ -30,7 +30,7 @@ export function App({offerPreviews, offerDescription, favorites, offerComments}:
             </PrivateRoute>
           }
         />
-        <Route path={AppRoutes.Offer} element={<OfferPage offerDescription={offerDescription} offerComments={offerComments} nearOfferPreviews={amsterdamOfferPreviews.slice(0, 3)}/>}/>
+        <Route path={AppRoutes.Offer} element={<OfferPage offerDescription={offerDescription} offerReviews={offerReviews} nearOfferPreviews={amsterdamOfferPreviews.slice(0, 3)}/>}/>
         <Route path="*" element={<NotFoundPage/>}/>
       </Routes>
     </BrowserRouter>

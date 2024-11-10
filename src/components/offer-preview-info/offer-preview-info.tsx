@@ -1,6 +1,6 @@
-import {RatingStars} from './rating-stars.tsx';
+import {RatingStars} from '../rating-stars/rating-stars.tsx';
 import {Link} from 'react-router-dom';
-import {OfferType} from '../types/offer.ts';
+import {OfferType} from '../../types/offer.ts';
 
 type OfferPreviewInfoProps = {
   offerDescriptionUrl: string;
@@ -25,7 +25,7 @@ export function OfferPreviewInfo({offerDescriptionUrl, price, rating, title, typ
           <span className="visually-hidden">To bookmarks</span>
         </button>
       </div>
-      <RatingStars rating={rating} className={'place-card'}/>
+      <RatingStars rating={rating} className="place-card"/>
       <h2 className="place-card__name">
         <Link to={offerDescriptionUrl}>{title}</Link>
       </h2>

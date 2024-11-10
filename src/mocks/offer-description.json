@@ -13,16 +13,16 @@
     "https://14.design.htmlacademy.pro/static/hotel/8.jpg"
   ],
   "city": {
-    "name": "Paris",
+    "name": "Amsterdam",
     "location": {
-      "latitude": 48.85661,
-      "longitude": 2.351499,
+      "latitude": 52.37454,
+      "longitude": 4.897976,
       "zoom": 13
     }
   },
   "location": {
-    "latitude": 48.868610000000004,
-    "longitude": 2.342499,
+    "latitude": 52.37554,
+    "longitude": 4.9019759999999994,
     "zoom": 16
   },
   "goods": [
@@ -43,7 +43,7 @@
     "name": "Angelina",
     "avatarUrl": "https://14.design.htmlacademy.pro/static/host/avatar-angelina.jpg"
   },
-  "isPremium": false,
+  "isPremium": true,
   "isFavorite": false,
   "rating": 2.6,
   "bedrooms": 5,
