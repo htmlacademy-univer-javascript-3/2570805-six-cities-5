@@ -8,5 +8,5 @@ type NearPlacesOfferCardsListProps = {
 export function NearPlacesOfferCardsList(props: NearPlacesOfferCardsListProps) {
   return (
     <OfferCardsList className="near-places__list places__list" itemClassName="near-places" {...props}/>
-  )
+  );
 }

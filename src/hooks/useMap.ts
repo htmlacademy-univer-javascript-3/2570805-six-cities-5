@@ -30,4 +30,4 @@ export function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City)
   }, [mapRef, map, city]);
 
   return map;
-};
+}

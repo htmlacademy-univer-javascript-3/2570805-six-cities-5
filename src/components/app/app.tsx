@@ -16,7 +16,7 @@ type AppScreenProps = {
 }
 
 export function App({offerPreviews, offerDescription, favorites, offerReviews}: AppScreenProps): JSX.Element {
-  const amsterdamOfferPreviews = offerPreviews.filter(o => o.city.name === 'Amsterdam');
+  const amsterdamOfferPreviews = offerPreviews.filter((o) => o.city.name === 'Amsterdam');
 
   return (
     <BrowserRouter>
