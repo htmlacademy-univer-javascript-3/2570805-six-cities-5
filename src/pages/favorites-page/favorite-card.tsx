@@ -9,7 +9,7 @@ type FavoriteCardProps = {
 }
 
 export function FavoriteCard({favorite}: FavoriteCardProps) {
-  const offerDescriptionUrl = `${AppRoutes.OfferBase}/${favorite.id}`;
+  const offerDescriptionUrl = `${AppRoutes.Offer}/${favorite.id}`;
 
   return (
     <article className="favorites__card place-card">

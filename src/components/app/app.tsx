@@ -30,7 +30,7 @@ export function App({offerPreviews, offerDescription, favorites, offerReviews}: 
             </PrivateRoute>
           }
         />
-        <Route path={AppRoutes.Offer} element={<OfferPage offerDescription={offerDescription} offerReviews={offerReviews} nearOfferPreviews={amsterdamOfferPreviews.slice(0, 3)}/>}/>
+        <Route path={AppRoutes.SpecificOffer} element={<OfferPage offerDescription={offerDescription} offerReviews={offerReviews} nearOfferPreviews={amsterdamOfferPreviews.slice(0, 3)}/>}/>
         <Route path="*" element={<NotFoundPage/>}/>
       </Routes>
     </BrowserRouter>
