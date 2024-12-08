@@ -16,12 +16,12 @@ type AppScreenProps = {
 }
 
 export function App({offerPreviews, offerDescription, favorites, offerReviews}: AppScreenProps): JSX.Element {
-  const amsterdamOfferPreviews = offerPreviews.filter(o => o.city.name === 'Amsterdam');
+  const amsterdamOfferPreviews = offerPreviews.filter((o) => o.city.name === 'Amsterdam');
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoutes.Root} element={<MainPage offerPreviews={amsterdamOfferPreviews}/>}/>
+        <Route path={AppRoutes.Root} element={<MainPage/>}/>
         <Route path={AppRoutes.Login} element={<LoginPage/>}/>
         <Route path={AppRoutes.Favorites}
           element={

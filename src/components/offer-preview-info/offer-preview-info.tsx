@@ -31,5 +31,5 @@ export function OfferPreviewInfo({offerDescriptionUrl, price, rating, title, typ
       </h2>
       <p className="place-card__type">{type}</p>
     </>
-  )
+  );
 }

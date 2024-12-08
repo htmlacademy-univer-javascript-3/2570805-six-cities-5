@@ -9,5 +9,5 @@ type CitiesOfferCardsListProps = {
 export function CitiesOfferCardsList(props: CitiesOfferCardsListProps) {
   return (
     <OfferCardsList className="cities__places-list places__list tabs__content" itemClassName="cities" {...props}/>
-  )
+  );
 }

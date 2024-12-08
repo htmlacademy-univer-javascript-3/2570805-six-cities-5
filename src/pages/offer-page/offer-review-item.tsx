@@ -7,9 +7,9 @@ type OfferReviewItemProps = {
 
 function formatToDateString(dateISO: string) {
   const date = new Date(dateISO);
-  const formatter = new Intl.DateTimeFormat("en-US", {
-    month: "long",
-    year: "numeric",
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    month: 'long',
+    year: 'numeric',
   });
   return formatter.format(date);
 }

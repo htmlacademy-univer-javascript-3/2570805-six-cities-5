@@ -8,7 +8,7 @@ type OfferReviewsListProps = {
 export function OfferReviewsList({offerReviews}: OfferReviewsListProps) {
   return (
     <ul className="reviews__list">
-      {offerReviews.map(review => (
+      {offerReviews.map((review) => (
         <li key={review.id} className="reviews__item">
           <OfferReviewItem offerReview={review}/>
         </li>

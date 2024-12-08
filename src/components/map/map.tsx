@@ -1,10 +1,10 @@
 import {City} from '../../types/city.ts';
 import {OfferBase} from '../../types/offer.ts';
-import leaflet from 'leaflet';
+import leaflet, {Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../consts.ts';
 import {useEffect, useRef} from 'react';
-import {useMap} from '../../hooks/useMap.ts';
+import {useMap} from '../../hooks/use-map.ts';
 
 type MapProps = {
   city: City;
@@ -29,9 +29,11 @@ export function Map({city, offers, activeOfferPreviewId}: MapProps): JSX.Element
   const map = useMap(mapRef, city);
 
   useEffect(() => {
+    const markers: Marker[] = [];
+
     if (map) {
       offers.forEach((offer) => {
-        leaflet
+        const marker = leaflet
           .marker({
             lat: offer.location.latitude,
             lng: offer.location.longitude,
@@ -41,8 +43,15 @@ export function Map({city, offers, activeOfferPreviewId}: MapProps): JSX.Element
               : defaultCustomIcon
           })
           .addTo(map);
+        markers.push(marker);
       });
     }
+
+    return () => {
+      markers.forEach((marker) => {
+        marker.remove();
+      });
+    };
   }, [map, city, offers, activeOfferPreviewId]);
 
   return (

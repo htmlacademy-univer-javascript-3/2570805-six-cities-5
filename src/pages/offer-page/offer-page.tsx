@@ -51,7 +51,7 @@ export function OfferPage({offerDescription, offerReviews, nearOfferPreviews}: O
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              {offerDescription.images.map(image => (
+              {offerDescription.images.map((image) => (
                 <div key={image} className="offer__image-wrapper">
                   <img className="offer__image" src={image} alt="Photo studio"/>
                 </div>
@@ -72,7 +72,7 @@ export function OfferPage({offerDescription, offerReviews, nearOfferPreviews}: O
                   <span className="visually-hidden">To bookmarks</span>
                 </button>
               </div>
-              <RatingStars rating={offerDescription.rating} className="offer" showRatingValue={true}/>
+              <RatingStars rating={offerDescription.rating} className="offer" showRatingValue/>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
                   {offerDescription.type}
@@ -91,7 +91,7 @@ export function OfferPage({offerDescription, offerReviews, nearOfferPreviews}: O
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
-                  {offerDescription.goods.map(good => (
+                  {offerDescription.goods.map((good) => (
                     <li key={good} className="offer__inside-item">
                       {good}
                     </li>
@@ -107,9 +107,10 @@ export function OfferPage({offerDescription, offerReviews, nearOfferPreviews}: O
                   <span className="offer__user-name">
                     {offerDescription.host.name}
                   </span>
-                  {offerDescription.host.isPro && <span className="offer__user-status">
-                    Pro
-                  </span>}
+                  {offerDescription.host.isPro &&
+                    <span className="offer__user-status">
+                      Pro
+                    </span>}
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">
