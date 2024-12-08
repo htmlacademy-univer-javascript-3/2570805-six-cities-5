@@ -11,7 +11,7 @@ type OfferCardProps = {
 }
 
 export function OfferCard({offerPreview, setActiveOfferPreview, className}: OfferCardProps): JSX.Element {
-  const offerDescriptionUrl = `${AppRoutes.OfferBase}/${offerPreview.id}`;
+  const offerDescriptionUrl = `${AppRoutes.Offer}/${offerPreview.id}`;
   function handleOnMouseOver() {
     if (setActiveOfferPreview) {
       setActiveOfferPreview(offerPreview.id);
