@@ -1,6 +1,6 @@
 import {OfferPreview} from '../../types/offer.ts';
 import {PremiumMark} from '../../components/premium-mark/premium-mark.tsx';
-import {AppRoutes} from '../../consts.ts';
+import {AppRoutes} from '../../consts/consts.ts';
 import {Link} from 'react-router-dom';
 import {OfferPreviewInfo} from '../../components/offer-preview-info/offer-preview-info.tsx';
 

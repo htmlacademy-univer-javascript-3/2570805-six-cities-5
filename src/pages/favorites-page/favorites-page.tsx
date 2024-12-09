@@ -1,7 +1,7 @@
 import {OfferPreview} from '../../types/offer.ts';
 import {FavoritesList} from './favorites-list.tsx';
 import {Link} from 'react-router-dom';
-import {AppRoutes} from '../../consts.ts';
+import {AppRoutes} from '../../consts/consts.ts';
 
 type FavoritesPageProps = {
   favorites: OfferPreview[];

@@ -1,7 +1,6 @@
 import {Location} from './location.ts';
-import {CITIES} from '../consts.ts';
 
-export type CityName = typeof CITIES[number];
+export type CityName = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
 
 export type City = {
   name: CityName;

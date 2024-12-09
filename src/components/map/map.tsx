@@ -2,7 +2,7 @@ import {City} from '../../types/city.ts';
 import {OfferBase} from '../../types/offer.ts';
 import leaflet, {Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../consts.ts';
+import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../consts/consts.ts';
 import {useEffect, useRef} from 'react';
 import {useMap} from '../../hooks/use-map.ts';
 

@@ -1,8 +1,8 @@
 import {useState} from 'react';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
-import {OFFERS_SORTING_OPTIONS} from '../../consts.ts';
+import {OFFERS_SORTING_OPTIONS} from '../../consts/consts.ts';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
-import {changeSortingOption} from '../../store/action.ts';
+import {changeSortingOptionAction} from '../../store/action.ts';
 import {SortingOption} from '../../types/sorting-option.ts';
 import {OfferBase} from '../../types/offer.ts';
 
@@ -16,7 +16,7 @@ export function OffersSortingOptions(): JSX.Element {
   }
 
   function handleOnSortingOptionClick(sortingOption: SortingOption<OfferBase>) {
-    dispatch(changeSortingOption({sortingOption}));
+    dispatch(changeSortingOptionAction(sortingOption));
     setIsOpen(!isOpen);
   }
 

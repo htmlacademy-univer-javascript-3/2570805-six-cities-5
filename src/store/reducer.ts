@@ -1,32 +1,37 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {CITIES, OFFERS_SORTING_OPTIONS} from '../consts.ts';
-import {changeCity, changeSortingOption, updateOffers} from './action.ts';
+import {OFFERS_SORTING_OPTIONS} from '../consts/consts.ts';
+import {changeCityAction, changeSortingOptionAction, setLoadingAction, updateOffersAction} from './action.ts';
 import {OfferBase, OfferPreview} from '../types/offer.ts';
-import {OFFER_PREVIEWS_MOCK} from '../mocks/mocks.ts';
-import {CityName} from '../types/city.ts';
+import {City} from '../types/city.ts';
 import {SortingOption} from '../types/sorting-option.ts';
+import {CITIES} from '../consts/cities.ts';
 
 type InitialState = {
-  city: CityName;
+  city: City;
   offers: OfferPreview[];
   sortingOption: SortingOption<OfferBase>;
+  isLoading: boolean;
 }
 
 const initialState: InitialState = {
   city: CITIES[0],
-  offers: OFFER_PREVIEWS_MOCK,
+  offers: [],
   sortingOption: OFFERS_SORTING_OPTIONS[0],
+  isLoading: false,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(changeCity, (state, action) => {
-      state.city = action.payload.city;
+    .addCase(changeCityAction, (state, action) => {
+      state.city = action.payload;
     })
-    .addCase(updateOffers, (state, action) => {
-      state.offers = action.payload.offers;
+    .addCase(updateOffersAction, (state, action) => {
+      state.offers = action.payload;
     })
-    .addCase(changeSortingOption, (state, action) => {
-      state.sortingOption = action.payload.sortingOption;
+    .addCase(changeSortingOptionAction, (state, action) => {
+      state.sortingOption = action.payload;
+    })
+    .addCase(setLoadingAction, (state, action) => {
+      state.isLoading = action.payload;
     });
 });

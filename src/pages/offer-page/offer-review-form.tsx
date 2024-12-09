@@ -1,5 +1,5 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
-import {MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH} from '../../consts.ts';
+import {MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH} from '../../consts/consts.ts';
 
 const RATING: [number, string][] = [
   [5, 'perfect'],
