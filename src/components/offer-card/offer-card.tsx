@@ -1,7 +1,7 @@
 import {OfferPreview} from '../../types/offer.ts';
 import {PremiumMark} from '../premium-mark/premium-mark.tsx';
 import {Link} from 'react-router-dom';
-import {AppRoutes} from '../../consts.ts';
+import {AppRoutes} from '../../consts/consts.ts';
 import {OfferPreviewInfo} from '../offer-preview-info/offer-preview-info.tsx';
 
 type OfferCardProps = {

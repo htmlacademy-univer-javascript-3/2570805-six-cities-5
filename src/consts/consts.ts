@@ -1,5 +1,11 @@
-import {SortingOption} from './types/sorting-option.ts';
-import {OfferBase} from './types/offer.ts';
+import {SortingOption} from '../types/sorting-option.ts';
+import {OfferBase} from '../types/offer.ts';
+
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}
 
 export enum AppRoutes {
   Root = '/',
@@ -9,13 +15,15 @@ export enum AppRoutes {
   Offer = '/offer'
 }
 
+export enum APIRoute {
+  Offers = '/offers'
+}
+
 export const MIN_REVIEW_LENGTH = 50;
 export const MAX_REVIEW_LENGTH = 300;
 
 export const URL_MARKER_DEFAULT = 'img/pin.svg';
 export const URL_MARKER_CURRENT = 'img/pin-active.svg';
-
-export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'] as const;
 
 export const OFFERS_SORTING_OPTIONS: SortingOption<OfferBase>[] = [
   {

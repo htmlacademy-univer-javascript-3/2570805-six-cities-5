@@ -1,6 +1,6 @@
 import {OfferReviewForm} from './offer-review-form.tsx';
 import {Link} from 'react-router-dom';
-import {AppRoutes} from '../../consts.ts';
+import {AppRoutes} from '../../consts/consts.ts';
 import {OfferReview, OfferDescription, OfferPreview} from '../../types/offer.ts';
 import {Map} from '../../components/map/map.tsx';
 import {OfferReviewsList} from './offer-reviews-list.tsx';
