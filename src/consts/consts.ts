@@ -7,7 +7,7 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
-export enum AppRoutes {
+export enum AppRoute {
   Root = '/',
   Login = '/login',
   Favorites = '/favorites',
@@ -16,7 +16,9 @@ export enum AppRoutes {
 }
 
 export enum APIRoute {
-  Offers = '/offers'
+  Offers = '/offers',
+  Login = '/login',
+  Logout = '/logout',
 }
 
 export const MIN_REVIEW_LENGTH = 50;
