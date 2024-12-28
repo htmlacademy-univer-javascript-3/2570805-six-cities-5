@@ -1,20 +1,36 @@
 import {OfferReviewForm} from './offer-review-form.tsx';
-import {OfferReview, OfferDescription, OfferPreview} from '../../types/offer.ts';
 import {Map} from '../../components/map/map.tsx';
 import {OfferReviewsList} from './offer-reviews-list.tsx';
 import {NearPlacesOfferCardsList} from './near-places-offer-cards-list.tsx';
 import {RatingStars} from '../../components/rating-stars/rating-stars.tsx';
 import {PremiumMark} from '../../components/premium-mark/premium-mark.tsx';
 import {Header} from '../../components/header/header.tsx';
+import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
+import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {useEffect} from 'react';
+import {fetchNearbyOffersAction, fetchOfferDescriptionAction, fetchReviewsAction} from '../../store/api-actions.ts';
+import {useParams} from 'react-router-dom';
+import {Spinner} from "../../components/spinner/spinner.tsx";
 
 
-type OfferPageProps = {
-  offerDescription: OfferDescription;
-  offerReviews: OfferReview[];
-  nearOfferPreviews: OfferPreview[];
-}
+export function OfferPage(): JSX.Element {
+  const isLoading = useAppSelector((state) => state.isOfferPreviewsLoading);
+  const {id: offerId} = useParams<string>();
+  const dispatch = useAppDispatch();
+  const offerDescription = useAppSelector((state) => state.offerDescription);
+  const nearbyOfferPreviews = useAppSelector((state) => state.nearbyOffers);
+  const offerReviews = useAppSelector((state) => state.reviews);
 
-export function OfferPage({offerDescription, offerReviews, nearOfferPreviews}: OfferPageProps): JSX.Element {
+  useEffect(() => {
+    if (offerId) {
+      dispatch(fetchOfferDescriptionAction(offerId));
+    }
+  }, [dispatch, offerId]);
+
+  if (isLoading || !offerDescription) {
+    return (<Spinner/>);
+  }
+
   return (
     <div className="page">
       <Header showNavigation/>
@@ -98,13 +114,13 @@ export function OfferPage({offerDescription, offerReviews, nearOfferPreviews}: O
             </div>
           </div>
           <section className="offer__map map" style={{height: '550px', width: '1144px', marginLeft: 'auto', marginRight: 'auto'}}>
-            <Map city={nearOfferPreviews[0].city} offers={[...nearOfferPreviews, offerDescription]} activeOfferPreviewId={offerDescription.id}/>
+            <Map city={nearbyOfferPreviews[0].city} offers={[...nearbyOfferPreviews, offerDescription]} activeOfferPreviewId={offerDescription.id}/>
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <NearPlacesOfferCardsList offerPreviews={nearOfferPreviews}/>
+            <NearPlacesOfferCardsList offerPreviews={nearbyOfferPreviews}/>
           </section>
         </div>
       </main>
