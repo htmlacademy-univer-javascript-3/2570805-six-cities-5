@@ -8,18 +8,21 @@ import {Header} from '../../components/header/header.tsx';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {useEffect} from 'react';
-import {fetchNearbyOffersAction, fetchOfferDescriptionAction, fetchReviewsAction} from '../../store/api-actions.ts';
+import {fetchOfferDescriptionAction} from '../../store/api-actions.ts';
 import {useParams} from 'react-router-dom';
-import {Spinner} from "../../components/spinner/spinner.tsx";
+import {Spinner} from '../../components/spinner/spinner.tsx';
+import {GetWordInCorrectNumber} from '../../services/common.ts';
+import {AuthorizationStatus} from '../../consts/consts.ts';
 
 
 export function OfferPage(): JSX.Element {
-  const isLoading = useAppSelector((state) => state.isOfferPreviewsLoading);
+  const isLoading = useAppSelector((state) => state.isOfferDescriptionLoading);
   const {id: offerId} = useParams<string>();
   const dispatch = useAppDispatch();
   const offerDescription = useAppSelector((state) => state.offerDescription);
-  const nearbyOfferPreviews = useAppSelector((state) => state.nearbyOffers);
+  const nearbyOfferPreviews = useAppSelector((state) => state.nearbyOffers).slice(0, 3);
   const offerReviews = useAppSelector((state) => state.reviews);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   useEffect(() => {
     if (offerId) {
@@ -66,10 +69,10 @@ export function OfferPage(): JSX.Element {
                   {offerDescription.type}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  {offerDescription.bedrooms} Bedrooms
+                  {offerDescription.bedrooms} {GetWordInCorrectNumber(offerDescription.bedrooms, 'Bedroom')}
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max {offerDescription.maxAdults} adults
+                  Max {offerDescription.maxAdults} {GetWordInCorrectNumber(offerDescription.maxAdults, 'adult')}
                 </li>
               </ul>
               <div className="offer__price">
@@ -109,7 +112,7 @@ export function OfferPage(): JSX.Element {
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{offerReviews.length}</span></h2>
                 <OfferReviewsList offerReviews={offerReviews}/>
-                <OfferReviewForm/>
+                {authorizationStatus === AuthorizationStatus.Auth && <OfferReviewForm/>}
               </section>
             </div>
           </div>

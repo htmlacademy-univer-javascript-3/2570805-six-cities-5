@@ -1,5 +1,9 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH} from '../../consts/consts.ts';
+import {sendReviewAction} from '../../store/api-actions.ts';
+import {useParams} from 'react-router-dom';
+import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
+import {toast} from 'react-toastify';
 
 const RATING: [number, string][] = [
   [5, 'perfect'],
@@ -10,18 +14,32 @@ const RATING: [number, string][] = [
 ];
 
 export function OfferReviewForm() {
-  const [formData, setFormData] = useState<{rating: number | null; review: string}>({'rating': null, 'review': ''});
+  const {id: offerId} = useParams<string>();
+  const [formData, setFormData] = useState<{rating: number | null; review: string}>({rating: null, review: ''});
   const isValid = formData.rating !== null && formData.review.length >= MIN_REVIEW_LENGTH && formData.review.length <= MAX_REVIEW_LENGTH;
+  const dispatch = useAppDispatch();
 
-  function handleReviewChange(evt: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) {
+  function handleRatingChange(evt: ChangeEvent<HTMLInputElement>) {
+    const {name, value} = evt.currentTarget;
+    setFormData({...formData, [name]: Number(value)});
+  }
+
+  function handleReviewChange(evt: ChangeEvent<HTMLTextAreaElement>) {
     const {name, value} = evt.currentTarget;
     setFormData({...formData, [name]: value});
   }
 
   function handleFormSubmit(evt: FormEvent<HTMLFormElement>) {
     evt.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log(formData);
+
+    if (offerId && formData.rating) {
+      try {
+        dispatch(sendReviewAction({offerId, comment: formData.review, rating: formData.rating}));
+        setFormData({rating: null, review: ''});
+      } catch {
+        toast.warn('Failed to send review');
+      }
+    }
   }
 
   return (
@@ -36,7 +54,8 @@ export function OfferReviewForm() {
               value={value}
               id={`${value}-stars`}
               type="radio"
-              onChange={handleReviewChange}
+              onChange={handleRatingChange}
+              checked={formData.rating === value}
             />
             <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={title}>
               <svg className="form__star-image" width="37" height="33">
@@ -52,6 +71,7 @@ export function OfferReviewForm() {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={handleReviewChange}
+        value={formData.review}
       >
       </textarea>
       <div className="reviews__button-wrapper">

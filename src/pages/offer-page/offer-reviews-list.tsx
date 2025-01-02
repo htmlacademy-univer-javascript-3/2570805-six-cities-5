@@ -8,11 +8,14 @@ type OfferReviewsListProps = {
 export function OfferReviewsList({offerReviews}: OfferReviewsListProps) {
   return (
     <ul className="reviews__list">
-      {offerReviews.map((review) => (
-        <li key={review.id} className="reviews__item">
-          <OfferReviewItem offerReview={review}/>
-        </li>
-      ))}
+      {offerReviews
+        .toSorted((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .slice(0, 10)
+        .map((review) => (
+          <li key={review.id} className="reviews__item">
+            <OfferReviewItem offerReview={review}/>
+          </li>
+        ))}
     </ul>
   );
 }

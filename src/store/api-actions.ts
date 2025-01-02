@@ -8,11 +8,12 @@ import {
   setAuthorizationStatusAction,
   setCurrentUserAction,
   setOfferPreviewsLoadingAction, setNearbyOffersAction, setOfferDescriptionAction, setOfferReviewsAction,
-  updateOfferPreviewsAction
+  updateOfferPreviewsAction, setOfferDescriptionLoadingAction, addOfferReviewAction
 } from './action.ts';
 import {dropToken, setToken} from '../services/token.ts';
 import {UserData} from '../types/user.ts';
 import {AuthData} from '../types/auth-data.ts';
+import {ReviewRequest} from '../types/review-request.ts';
 
 export const fetchOfferPreviewsAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -52,6 +53,18 @@ export const fetchReviewsAction = createAsyncThunk<void, string, {
   }
 );
 
+export const sendReviewAction = createAsyncThunk<void, ReviewRequest, {
+  dispatch: AppDispatch;
+  state: AppState;
+  extra: AxiosInstance;
+}>(
+  'sendReview',
+  async ({offerId, comment, rating}, {dispatch, extra: api}) => {
+    const {data} = await api.post<OfferReview>(APIRoute.Reviews.replace('{offerId}', offerId), {comment, rating: rating});
+    dispatch(addOfferReviewAction(data));
+  }
+);
+
 export const fetchOfferDescriptionAction = createAsyncThunk<void, string, {
   dispatch: AppDispatch;
   state: AppState;
@@ -60,7 +73,7 @@ export const fetchOfferDescriptionAction = createAsyncThunk<void, string, {
   'fetchOfferDescription',
   async (offerId, {dispatch, extra: api}) => {
     try {
-      dispatch(setOfferPreviewsLoadingAction(true));
+      dispatch(setOfferDescriptionLoadingAction(true));
       dispatch(fetchNearbyOffersAction(offerId));
       dispatch(fetchReviewsAction(offerId));
       const {data} = await api.get<OfferDescription>(APIRoute.SpecificOffer.replace('{offerId}', offerId));
@@ -68,7 +81,7 @@ export const fetchOfferDescriptionAction = createAsyncThunk<void, string, {
     } catch (error) {
       dispatch(redirectToRouteAction(AppRoute.NotFound));
     } finally {
-      dispatch(setOfferPreviewsLoadingAction(false));
+      dispatch(setOfferDescriptionLoadingAction(false));
     }
   }
 );

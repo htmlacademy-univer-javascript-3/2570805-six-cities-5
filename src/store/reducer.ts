@@ -5,7 +5,7 @@ import {
   changeSortingOptionAction,
   setAuthorizationStatusAction, setCurrentUserAction,
   setOfferPreviewsLoadingAction, setNearbyOffersAction, setOfferDescriptionAction, setOfferReviewsAction,
-  updateOfferPreviewsAction, setOfferDescriptionLoadingAction
+  updateOfferPreviewsAction, setOfferDescriptionLoadingAction, addOfferReviewAction
 } from './action.ts';
 import {OfferBase, OfferDescription, OfferPreview, OfferReview} from '../types/offer.ts';
 import {City} from '../types/city.ts';
@@ -70,5 +70,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setOfferReviewsAction, (state, action) => {
       state.reviews = action.payload;
+    })
+    .addCase(addOfferReviewAction, (state, action) => {
+      state.reviews.push(action.payload);
     });
 });

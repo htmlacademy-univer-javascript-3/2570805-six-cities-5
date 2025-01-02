@@ -24,6 +24,7 @@ export const setOfferDescriptionAction = createAction<OfferDescription>('setOffe
 export const setNearbyOffersAction = createAction<OfferPreview[]>('setNearbyOffers');
 
 export const setOfferReviewsAction = createAction<OfferReview[]>('setOfferReviews');
+export const addOfferReviewAction = createAction<OfferReview>('addOfferReview');
 
 export const redirectToRouteActionName = 'redirectToRoute';
 export const redirectToRouteAction = createAction<AppRoute>(redirectToRouteActionName);
