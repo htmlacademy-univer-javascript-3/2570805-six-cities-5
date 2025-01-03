@@ -1,20 +1,39 @@
 import {OfferReviewForm} from './offer-review-form.tsx';
-import {OfferReview, OfferDescription, OfferPreview} from '../../types/offer.ts';
 import {Map} from '../../components/map/map.tsx';
 import {OfferReviewsList} from './offer-reviews-list.tsx';
 import {NearPlacesOfferCardsList} from './near-places-offer-cards-list.tsx';
 import {RatingStars} from '../../components/rating-stars/rating-stars.tsx';
 import {PremiumMark} from '../../components/premium-mark/premium-mark.tsx';
 import {Header} from '../../components/header/header.tsx';
+import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
+import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {useEffect} from 'react';
+import {fetchOfferDescriptionAction} from '../../store/api-actions.ts';
+import {useParams} from 'react-router-dom';
+import {Spinner} from '../../components/spinner/spinner.tsx';
+import {GetWordInCorrectNumber} from '../../services/common.ts';
+import {AuthorizationStatus} from '../../consts/consts.ts';
 
 
-type OfferPageProps = {
-  offerDescription: OfferDescription;
-  offerReviews: OfferReview[];
-  nearOfferPreviews: OfferPreview[];
-}
+export function OfferPage(): JSX.Element {
+  const isLoading = useAppSelector((state) => state.isOfferDescriptionLoading);
+  const {id: offerId} = useParams<string>();
+  const dispatch = useAppDispatch();
+  const offerDescription = useAppSelector((state) => state.offerDescription);
+  const nearbyOfferPreviews = useAppSelector((state) => state.nearbyOffers).slice(0, 3);
+  const offerReviews = useAppSelector((state) => state.reviews);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-export function OfferPage({offerDescription, offerReviews, nearOfferPreviews}: OfferPageProps): JSX.Element {
+  useEffect(() => {
+    if (offerId) {
+      dispatch(fetchOfferDescriptionAction(offerId));
+    }
+  }, [dispatch, offerId]);
+
+  if (isLoading || !offerDescription) {
+    return (<Spinner/>);
+  }
+
   return (
     <div className="page">
       <Header showNavigation/>
@@ -50,10 +69,10 @@ export function OfferPage({offerDescription, offerReviews, nearOfferPreviews}: O
                   {offerDescription.type}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  {offerDescription.bedrooms} Bedrooms
+                  {offerDescription.bedrooms} {GetWordInCorrectNumber(offerDescription.bedrooms, 'Bedroom')}
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max {offerDescription.maxAdults} adults
+                  Max {offerDescription.maxAdults} {GetWordInCorrectNumber(offerDescription.maxAdults, 'adult')}
                 </li>
               </ul>
               <div className="offer__price">
@@ -93,18 +112,18 @@ export function OfferPage({offerDescription, offerReviews, nearOfferPreviews}: O
               <section className="offer__reviews reviews">
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{offerReviews.length}</span></h2>
                 <OfferReviewsList offerReviews={offerReviews}/>
-                <OfferReviewForm/>
+                {authorizationStatus === AuthorizationStatus.Auth && <OfferReviewForm/>}
               </section>
             </div>
           </div>
           <section className="offer__map map" style={{height: '550px', width: '1144px', marginLeft: 'auto', marginRight: 'auto'}}>
-            <Map city={nearOfferPreviews[0].city} offers={[...nearOfferPreviews, offerDescription]} activeOfferPreviewId={offerDescription.id}/>
+            <Map city={nearbyOfferPreviews[0].city} offers={[...nearbyOfferPreviews, offerDescription]} activeOfferPreviewId={offerDescription.id}/>
           </section>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
-            <NearPlacesOfferCardsList offerPreviews={nearOfferPreviews}/>
+            <NearPlacesOfferCardsList offerPreviews={nearbyOfferPreviews}/>
           </section>
         </div>
       </main>
