@@ -14,6 +14,7 @@ const initialState: OffersData = {
   isOfferPreviewsLoading: false,
   isOfferDescriptionLoading: false,
   isFavoritesLoading: false,
+  isReviewSending: false,
   offerDescription: null,
   reviews: [],
   nearbyOffers: [],
@@ -43,8 +44,15 @@ export const offersData = createSlice({
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
       })
+      .addCase(sendReviewAction.pending, (state) => {
+        state.isReviewSending = true;
+      })
       .addCase(sendReviewAction.fulfilled, (state, action) => {
         state.reviews.push(action.payload);
+        state.isReviewSending = false;
+      })
+      .addCase(sendReviewAction.rejected, (state) => {
+        state.isReviewSending = false;
       })
       .addCase(fetchOfferDescriptionAction.pending, (state) => {
         state.isOfferDescriptionLoading = true;
@@ -56,6 +64,7 @@ export const offersData = createSlice({
       .addCase(fetchOfferDescriptionAction.rejected, (state) => {
         state.isOfferDescriptionLoading = false;
       })
+
       .addCase(fetchFavoritesAction.pending, (state) => {
         state.isFavoritesLoading = true;
       })

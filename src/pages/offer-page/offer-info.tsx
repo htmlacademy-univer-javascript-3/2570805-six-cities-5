@@ -1,7 +1,7 @@
 import {memo} from 'react';
 import {PremiumMark} from '../../components/premium-mark/premium-mark.tsx';
 import {RatingStars} from '../../components/rating-stars/rating-stars.tsx';
-import {GetWordInCorrectNumber} from '../../services/common.ts';
+import {getWordInCorrectNumber} from '../../services/common.ts';
 import {AuthorizationStatus, MAX_IMAGES_COUNT} from '../../consts/consts.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {OfferDescription} from '../../types/offer.ts';
@@ -51,10 +51,10 @@ function OfferInfoImpl({offerDescription}: OfferInfoProps): JSX.Element {
               {offerDescription.type}
             </li>
             <li className="offer__feature offer__feature--bedrooms">
-              {offerDescription.bedrooms} {GetWordInCorrectNumber(offerDescription.bedrooms, 'Bedroom')}
+              {offerDescription.bedrooms} {getWordInCorrectNumber(offerDescription.bedrooms, 'Bedroom')}
             </li>
             <li className="offer__feature offer__feature--adults">
-              Max {offerDescription.maxAdults} {GetWordInCorrectNumber(offerDescription.maxAdults, 'adult')}
+              Max {offerDescription.maxAdults} {getWordInCorrectNumber(offerDescription.maxAdults, 'adult')}
             </li>
           </ul>
           <div className="offer__price">

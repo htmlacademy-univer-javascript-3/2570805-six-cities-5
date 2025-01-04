@@ -1,12 +1,15 @@
 import {Header} from '../../components/header/header.tsx';
-import {ChangeEvent, FormEvent, useState} from 'react';
+import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {loginAction} from '../../store/api-actions.ts';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
-import {Navigate} from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {AppRoute, AuthorizationStatus} from '../../consts/consts.ts';
 import {toast} from 'react-toastify';
 import {getAuthorizationStatus} from '../../store/user-process/selectors.ts';
+import {changeCityAction} from '../../store/options-process/options-process.ts';
+import {CITIES} from '../../consts/cities.ts';
+import {getRandomInt} from '../../services/common.ts';
 
 function isValidPassword(password: string) {
   const containsLetter = /[A-Za-z]/.test(password);
@@ -32,6 +35,13 @@ export function LoginPage(): JSX.Element {
       return;
     }
     dispatch(loginAction({email: formData.email, password: password}));
+  }
+
+  function handleCityLinkClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    const spanElement = event.currentTarget.querySelector('span');
+    if (spanElement && spanElement.textContent) {
+      dispatch(changeCityAction(CITIES.find((c) => c.name === spanElement.textContent)!));
+    }
   }
 
   if (authorizationStatus === AuthorizationStatus.Auth) {
@@ -60,9 +70,9 @@ export function LoginPage(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link className="locations__item-link" to={AppRoute.Root} onClick={handleCityLinkClick}>
+                <span>{CITIES[getRandomInt(CITIES.length)]!.name}</span>
+              </Link>
             </div>
           </section>
         </div>

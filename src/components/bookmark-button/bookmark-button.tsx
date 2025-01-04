@@ -10,7 +10,7 @@ type BookmarkButtonProps = {
   isFavorite: boolean;
   className: string;
   width: number;
-  height: number
+  height: number;
 }
 
 export function BookmarkButton({id, isFavorite, className, width, height}: BookmarkButtonProps): JSX.Element {
@@ -28,7 +28,7 @@ export function BookmarkButton({id, isFavorite, className, width, height}: Bookm
 
   return (
     <button
-      className={`${className}__bookmark-button ${isFavorite ? className + '__bookmark-button--active' : ''} button`}
+      className={`${className}__bookmark-button ${isFavorite ? `${className}__bookmark-button--active` : ''} button`}
       type="button"
       onClick={handleBookmarkClick}
     >

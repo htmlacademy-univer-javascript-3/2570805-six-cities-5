@@ -4,6 +4,8 @@ import {sendReviewAction} from '../../store/api-actions.ts';
 import {useParams} from 'react-router-dom';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
 import {toast} from 'react-toastify';
+import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {getReviewSendingStatus} from '../../store/offers-data/selectors.ts';
 
 const RATING: [number, string][] = [
   [5, 'perfect'],
@@ -18,6 +20,7 @@ export function OfferReviewForm() {
   const [formData, setFormData] = useState<{rating: number | null; review: string}>({rating: null, review: ''});
   const isValid = formData.rating !== null && formData.review.length >= MIN_REVIEW_LENGTH && formData.review.length <= MAX_REVIEW_LENGTH;
   const dispatch = useAppDispatch();
+  const isReviewSending = useAppSelector(getReviewSendingStatus);
 
   function handleRatingChange(evt: ChangeEvent<HTMLInputElement>) {
     const {name, value} = evt.currentTarget;
@@ -34,8 +37,8 @@ export function OfferReviewForm() {
 
     if (offerId && formData.rating) {
       try {
-        dispatch(sendReviewAction({offerId, comment: formData.review, rating: formData.rating}));
-        setFormData({rating: null, review: ''});
+        dispatch(sendReviewAction({offerId, comment: formData.review, rating: formData.rating}))
+          .then(() => setFormData({rating: null, review: ''}));
       } catch {
         toast.warn('Failed to send review');
       }
@@ -54,6 +57,7 @@ export function OfferReviewForm() {
               value={value}
               id={`${value}-stars`}
               type="radio"
+              disabled={isReviewSending}
               onChange={handleRatingChange}
               checked={formData.rating === value}
             />
@@ -70,6 +74,7 @@ export function OfferReviewForm() {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
+        disabled={isReviewSending}
         onChange={handleReviewChange}
         value={formData.review}
       >
@@ -79,7 +84,7 @@ export function OfferReviewForm() {
         To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay
         with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={!isValid}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={!isValid || isReviewSending}>Submit</button>
       </div>
     </form>
   );

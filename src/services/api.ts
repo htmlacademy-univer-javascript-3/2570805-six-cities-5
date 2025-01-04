@@ -40,6 +40,10 @@ export const createAPI = (): AxiosInstance => {
         toast.warn(detailMessage.message);
       }
 
+      if (error.response && error.response.status >= 500) {
+        toast.error(`Status code ${error.response.status}. Some problems on server side. ${error.response.data.message}`);
+      }
+
       throw error;
     }
   );
