@@ -2,14 +2,13 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, AppState} from '../types/state.ts';
 import {AxiosInstance} from 'axios';
 import {OfferDescription, OfferPreview, OfferReview} from '../types/offer.ts';
-import {APIRoute, AppRoute} from '../consts/consts.ts';
-import {
-  redirectToRouteAction
-} from './action.ts';
-import {dropToken, setToken} from '../services/token.ts';
+import {APIRoute, AppRoute, AuthorizationStatus, NameSpace} from '../consts/consts.ts';
+import {redirectToRouteAction} from './action.ts';
+import {dropToken, getToken, setToken} from '../services/token.ts';
 import {User, UserData} from '../types/user.ts';
 import {AuthData} from '../types/auth-data.ts';
 import {ReviewRequest} from '../types/review-request.ts';
+import {FavoriteEditRequest} from '../types/favorite-edit-request.ts';
 
 export const fetchOfferPreviewsAction = createAsyncThunk<OfferPreview[], undefined, {
   dispatch: AppDispatch;
@@ -84,8 +83,26 @@ export const fetchFavoritesAction = createAsyncThunk<OfferPreview[], undefined, 
   extra: AxiosInstance;
 }>(
   'data/fetchFavorites',
-  async (_arg, {extra: api}) => {
+  async (_arg, {getState, extra: api}) => {
+    if (getState()[NameSpace.User].authorizationStatus !== AuthorizationStatus.Auth) {
+      return [];
+    }
     const {data} = await api.get<OfferPreview[]>(APIRoute.Favorite);
+    return data;
+  }
+);
+
+export const editFavoriteStatusAction = createAsyncThunk<OfferPreview, FavoriteEditRequest, {
+  dispatch: AppDispatch;
+  state: AppState;
+  extra: AxiosInstance;
+}>(
+  'data/editFavoriteStatus',
+  async ({offerId, markFavorite}, {extra: api}) => {
+    const url = APIRoute.FavoriteEdit
+      .replace('{offerId}', offerId)
+      .replace('{status}', markFavorite ? '1' : '0');
+    const {data} = await api.post<OfferPreview>(url);
     return data;
   }
 );
@@ -97,6 +114,9 @@ export const checkAuthAction = createAsyncThunk<User, undefined, {
 }>(
   'user/checkAuth',
   async (_arg, {extra: api}) => {
+    if (getToken() === '') {
+      return Promise.reject();
+    }
     const {data: {token: token, ...user}} = await api.get<UserData>(APIRoute.Login);
     setToken(token);
     return user;

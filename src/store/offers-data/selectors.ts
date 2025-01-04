@@ -21,4 +21,7 @@ export const getNearbyOffers = createSelector(
   (offers) => offers.slice(0, MAX_NEARBY_OFFERS)
 );
 export const getReviews = (state: Pick<AppState, NameSpace.Data>) => state[NameSpace.Data].reviews;
+export const getReviewSendingStatus = (state: Pick<AppState, NameSpace.Data>) => state[NameSpace.Data].isReviewSending;
 export const getFavorites = (state: Pick<AppState, NameSpace.Data>) => state[NameSpace.Data].favorites;
+export const getFavoritesLoadingStatus = (state: Pick<AppState, NameSpace.Data>) => state[NameSpace.Data].isFavoritesLoading;
+

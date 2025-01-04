@@ -6,19 +6,18 @@ import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {OffersSortingOptions} from './offers-sorting-options.tsx';
 import {CITIES} from '../../consts/cities.ts';
 import {Header} from '../../components/header/header.tsx';
-import {Spinner} from '../../components/spinner/spinner.tsx';
 import {getCity} from '../../store/options-process/selectors.ts';
-import {getOfferPreviews, getOfferPreviewsLoadingStatus} from '../../store/offers-data/selectors.ts';
+import {getOfferPreviews} from '../../store/offers-data/selectors.ts';
+import {MainPageEmpty} from './main-page-empty.tsx';
 
 export function MainPage(): JSX.Element {
-  const isLoading = useAppSelector(getOfferPreviewsLoadingStatus);
   const [activeOfferPreviewId, setActiveOfferPreviewId] = useState<string | null>(null);
   const city = useAppSelector(getCity);
   const offerPreviews = useAppSelector(getOfferPreviews);
 
-  if (isLoading) {
+  if (!offerPreviews || offerPreviews.length === 0) {
     return (
-      <Spinner/>
+      <MainPageEmpty cityName={city.name}/>
     );
   }
 

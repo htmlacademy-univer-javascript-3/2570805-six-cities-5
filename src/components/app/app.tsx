@@ -11,11 +11,14 @@ import {HistoryRouter} from '../history-route/history-route.tsx';
 import {browserHistory} from '../../browser-history.ts';
 import {Spinner} from '../spinner/spinner.tsx';
 import {getAuthorizationStatus} from '../../store/user-process/selectors.ts';
+import {getFavoritesLoadingStatus, getOfferPreviewsLoadingStatus} from '../../store/offers-data/selectors.ts';
 
 export function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isFavoritesLoading = useAppSelector(getFavoritesLoadingStatus);
+  const isOfferPreviewsLoading = useAppSelector(getOfferPreviewsLoadingStatus);
 
-  if (authorizationStatus === AuthorizationStatus.Unknown) {
+  if (authorizationStatus === AuthorizationStatus.Unknown || isFavoritesLoading || isOfferPreviewsLoading) {
     return (<Spinner/>);
   }
 
