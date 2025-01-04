@@ -7,15 +7,14 @@ import {OffersSortingOptions} from './offers-sorting-options.tsx';
 import {CITIES} from '../../consts/cities.ts';
 import {Header} from '../../components/header/header.tsx';
 import {Spinner} from '../../components/spinner/spinner.tsx';
+import {getCity} from '../../store/options-process/selectors.ts';
+import {getOfferPreviews, getOfferPreviewsLoadingStatus} from '../../store/offers-data/selectors.ts';
 
 export function MainPage(): JSX.Element {
-  const isLoading = useAppSelector((state) => state.isOfferPreviewsLoading);
+  const isLoading = useAppSelector(getOfferPreviewsLoadingStatus);
   const [activeOfferPreviewId, setActiveOfferPreviewId] = useState<string | null>(null);
-  const city = useAppSelector((state) => state.city);
-  const offersSortingOption = useAppSelector((state) => state.sortingOption);
-  const offerPreviews = useAppSelector((state) => state.offers)
-    .filter((o) => o.city.name === city.name)
-    .sort(offersSortingOption.compareFn);
+  const city = useAppSelector(getCity);
+  const offerPreviews = useAppSelector(getOfferPreviews);
 
   if (isLoading) {
     return (

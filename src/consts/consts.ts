@@ -23,12 +23,15 @@ export enum APIRoute {
   Reviews = '/comments/{offerId}',
   Login = '/login',
   Logout = '/logout',
+  Favorite = '/favorite'
 }
 
 export const MIN_REVIEW_LENGTH = 50;
 export const MAX_REVIEW_LENGTH = 300;
 
 export const MAX_REVIEWS_COUNT = 10;
+
+export const MAX_NEARBY_OFFERS = 3;
 
 export enum OfferMarker {
   Default = "img/pin.svg",
@@ -57,5 +60,5 @@ export const OFFERS_SORTING_OPTIONS: readonly SortingOption<OfferBase>[] = [
 export enum NameSpace {
   Data = 'DATA',
   User = 'USER',
-  Filter = 'FILTER',
+  Options = 'Options',
 }

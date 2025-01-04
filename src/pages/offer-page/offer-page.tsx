@@ -8,14 +8,19 @@ import {fetchOfferDescriptionAction} from '../../store/api-actions.ts';
 import {useParams} from 'react-router-dom';
 import {Spinner} from '../../components/spinner/spinner.tsx';
 import {OfferInfo} from './offer-info.tsx';
+import {
+  getNearbyOffers,
+  getOfferDescription,
+  getOfferDescriptionLoadingStatus
+} from '../../store/offers-data/selectors.ts';
 
 
 export function OfferPage(): JSX.Element {
-  const isLoading = useAppSelector((state) => state.isOfferDescriptionLoading);
+  const isLoading = useAppSelector(getOfferDescriptionLoadingStatus);
   const {id: offerId} = useParams<string>();
   const dispatch = useAppDispatch();
-  const offerDescription = useAppSelector((state) => state.offerDescription);
-  const nearbyOfferPreviews = useAppSelector((state) => state.nearbyOffers).slice(0, 3);
+  const offerDescription = useAppSelector(getOfferDescription);
+  const nearbyOfferPreviews = useAppSelector(getNearbyOffers);
 
   useEffect(() => {
     if (offerId) {

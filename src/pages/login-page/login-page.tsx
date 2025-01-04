@@ -6,6 +6,7 @@ import {Navigate} from 'react-router-dom';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {AppRoute, AuthorizationStatus} from '../../consts/consts.ts';
 import {toast} from 'react-toastify';
+import {getAuthorizationStatus} from '../../store/user-process/selectors.ts';
 
 function isValidPassword(password: string) {
   const containsLetter = /[A-Za-z]/.test(password);
@@ -14,7 +15,7 @@ function isValidPassword(password: string) {
 }
 
 export function LoginPage(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState<{email: string; password: string}>({email: '', password: ''});
 

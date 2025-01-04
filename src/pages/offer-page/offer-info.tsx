@@ -7,14 +7,16 @@ import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {OfferDescription} from '../../types/offer.ts';
 import {OfferReviewsList} from './offer-reviews-list.tsx';
 import {OfferReviewForm} from './offer-review-form.tsx';
+import {getReviews} from '../../store/offers-data/selectors.ts';
+import {getAuthorizationStatus} from '../../store/user-process/selectors.ts';
 
 type OfferInfoProps = {
   offerDescription: OfferDescription;
 }
 
 export const OfferInfo = memo(function OfferInfo({offerDescription}: OfferInfoProps): JSX.Element {
-  const offerReviews = useAppSelector((state) => state.reviews);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const offerReviews = useAppSelector(getReviews);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <>

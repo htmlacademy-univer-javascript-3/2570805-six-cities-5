@@ -1,15 +1,16 @@
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
 import {City} from '../../types/city.ts';
-import {changeCityAction} from '../../store/action.ts';
 import {memo} from 'react';
+import {changeCityAction} from '../../store/options-process/options-process.ts';
+import {getCity} from '../../store/options-process/selectors.ts';
 
 type CitiesListProps = {
   cities: readonly City[];
 }
 
 export const CitiesList = memo(function CitiesList({cities}: CitiesListProps): JSX.Element {
-  const selectedCity = useAppSelector((state) => state.city);
+  const selectedCity = useAppSelector(getCity);
   const dispatch = useAppDispatch();
 
   function handleOnCityClick(city: City) {
