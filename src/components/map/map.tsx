@@ -2,7 +2,7 @@ import {City} from '../../types/city.ts';
 import {OfferBase} from '../../types/offer.ts';
 import leaflet, {Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import {URL_MARKER_CURRENT, URL_MARKER_DEFAULT} from '../../consts/consts.ts';
+import {OfferMarker} from '../../consts/consts.ts';
 import {useEffect, useRef} from 'react';
 import {useMap} from '../../hooks/use-map.ts';
 
@@ -13,13 +13,13 @@ type MapProps = {
 }
 
 const defaultCustomIcon = new leaflet.Icon({
-  iconUrl: URL_MARKER_DEFAULT,
+  iconUrl: OfferMarker.Default,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });
 
 const currentCustomIcon = new leaflet.Icon({
-  iconUrl: URL_MARKER_CURRENT,
+  iconUrl: OfferMarker.Current,
   iconSize: [40, 40],
   iconAnchor: [20, 40],
 });

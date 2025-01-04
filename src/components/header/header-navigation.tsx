@@ -3,9 +3,9 @@ import {AppRoute, AuthorizationStatus} from '../../consts/consts.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
 import {logoutAction} from '../../store/api-actions.ts';
-import React from 'react';
+import React, {memo} from 'react';
 
-export function HeaderNavigation(): JSX.Element {
+export const HeaderNavigation = memo(function HeaderNavigation(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const currentUser = useAppSelector((state) => state.currentUser);
   const dispatch = useAppDispatch();
@@ -51,4 +51,4 @@ export function HeaderNavigation(): JSX.Element {
       </ul>
     </nav>
   );
-}
+})

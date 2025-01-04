@@ -10,7 +10,7 @@ import {Spinner} from '../../components/spinner/spinner.tsx';
 
 export function MainPage(): JSX.Element {
   const isLoading = useAppSelector((state) => state.isOfferPreviewsLoading);
-  const [activeOfferPreviewId, setActiveOfferPreviewIdId] = useState<string | null>(null);
+  const [activeOfferPreviewId, setActiveOfferPreviewId] = useState<string | null>(null);
   const city = useAppSelector((state) => state.city);
   const offersSortingOption = useAppSelector((state) => state.sortingOption);
   const offerPreviews = useAppSelector((state) => state.offers)
@@ -35,7 +35,7 @@ export function MainPage(): JSX.Element {
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offerPreviews.length} places to stay in {city.name}</b>
               <OffersSortingOptions/>
-              <CitiesOfferCardsList offerPreviews={offerPreviews} setActiveOfferPreview={setActiveOfferPreviewIdId}/>
+              <CitiesOfferCardsList offerPreviews={offerPreviews} setActiveOfferPreview={setActiveOfferPreviewId}/>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
