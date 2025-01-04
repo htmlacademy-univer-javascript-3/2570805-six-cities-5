@@ -35,4 +35,4 @@ export const CitiesList = memo(function CitiesList({cities}: CitiesListProps): J
       </section>
     </div>
   );
-})
+});

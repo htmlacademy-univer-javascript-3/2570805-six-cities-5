@@ -17,7 +17,7 @@ export type OffersData = {
   reviews: OfferReview[];
   nearbyOffers: OfferPreview[];
   offerPreviews: OfferPreview[];
-  favorites: OfferPreview[]
+  favorites: OfferPreview[];
 }
 
 export type UserProcess = {

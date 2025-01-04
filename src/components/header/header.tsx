@@ -27,4 +27,4 @@ export const Header = memo(function Header({showNavigation}: HeaderProps): JSX.E
       </div>
     </header>
   );
-})
+});

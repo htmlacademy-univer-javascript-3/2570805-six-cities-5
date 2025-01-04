@@ -34,7 +34,7 @@ export const MAX_REVIEWS_COUNT = 10;
 export const MAX_NEARBY_OFFERS = 3;
 
 export enum OfferMarker {
-  Default = "img/pin.svg",
+  Default = 'img/pin.svg',
   Current = 'img/pin-active.svg'
 }
 

@@ -38,4 +38,4 @@ export const OfferCard = memo(function OfferCard({offerPreview, setActiveOfferPr
       </div>
     </article>
   );
-})
+});

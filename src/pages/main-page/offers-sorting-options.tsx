@@ -45,4 +45,4 @@ export const OffersSortingOptions = memo(function OffersSortingOptions(): JSX.El
       )}
     </form>
   );
-})
+});

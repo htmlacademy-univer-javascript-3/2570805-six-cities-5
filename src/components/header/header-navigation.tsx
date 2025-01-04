@@ -52,4 +52,4 @@ export const HeaderNavigation = memo(function HeaderNavigation(): JSX.Element {
       </ul>
     </nav>
   );
-})
+});

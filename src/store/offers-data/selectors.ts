@@ -4,15 +4,14 @@ import {createSelector} from '@reduxjs/toolkit';
 import {getCity, getSortingOption} from '../options-process/selectors.ts';
 
 export const getOfferPreviews = createSelector([
-    getSortingOption,
-    getCity,
-    (state: Pick<AppState, NameSpace.Data>) => state[NameSpace.Data].offerPreviews
-  ],
-  (sortingOption, city, offerPreviews) => {
-    return offerPreviews
-      .filter((o) => o.city.name === city.name)
-      .sort(sortingOption.compareFn);
-  });
+  getSortingOption,
+  getCity,
+  (state: Pick<AppState, NameSpace.Data>) => state[NameSpace.Data].offerPreviews
+],
+(sortingOption, city, offerPreviews) =>
+  offerPreviews
+    .filter((o) => o.city.name === city.name)
+    .sort(sortingOption.compareFn));
 
 export const getOfferPreviewsLoadingStatus = (state: Pick<AppState, NameSpace.Data>) => state[NameSpace.Data].isOfferPreviewsLoading;
 export const getOfferDescription = (state: Pick<AppState, NameSpace.Data>) => state[NameSpace.Data].offerDescription;
