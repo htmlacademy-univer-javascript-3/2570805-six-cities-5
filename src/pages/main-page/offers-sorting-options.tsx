@@ -7,7 +7,7 @@ import {OfferBase} from '../../types/offer.ts';
 import {changeSortingOptionAction} from '../../store/options-process/options-process.ts';
 import {getSortingOption} from '../../store/options-process/selectors.ts';
 
-export const OffersSortingOptions = memo(function OffersSortingOptions(): JSX.Element {
+function OffersSortingOptionsImpl(): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const selectedSortingOption = useAppSelector(getSortingOption);
   const dispatch = useAppDispatch();
@@ -45,4 +45,6 @@ export const OffersSortingOptions = memo(function OffersSortingOptions(): JSX.El
       )}
     </form>
   );
-});
+}
+
+export const OffersSortingOptions = memo(OffersSortingOptionsImpl);

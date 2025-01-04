@@ -14,7 +14,7 @@ type OfferInfoProps = {
   offerDescription: OfferDescription;
 }
 
-export const OfferInfo = memo(function OfferInfo({offerDescription}: OfferInfoProps): JSX.Element {
+function OfferInfoImpl({offerDescription}: OfferInfoProps): JSX.Element {
   const offerReviews = useAppSelector(getReviews);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
@@ -102,4 +102,6 @@ export const OfferInfo = memo(function OfferInfo({offerDescription}: OfferInfoPr
       </div>
     </>
   );
-});
+}
+
+export const OfferInfo = memo(OfferInfoImpl);

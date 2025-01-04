@@ -6,7 +6,7 @@ import {logoutAction} from '../../store/api-actions.ts';
 import React, {memo} from 'react';
 import {getAuthorizationStatus, getCurrentUser} from '../../store/user-process/selectors.ts';
 
-export const HeaderNavigation = memo(function HeaderNavigation(): JSX.Element {
+function HeaderNavigationImpl(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const currentUser = useAppSelector(getCurrentUser);
   const dispatch = useAppDispatch();
@@ -52,4 +52,6 @@ export const HeaderNavigation = memo(function HeaderNavigation(): JSX.Element {
       </ul>
     </nav>
   );
-});
+}
+
+export const HeaderNavigation = memo(HeaderNavigationImpl);

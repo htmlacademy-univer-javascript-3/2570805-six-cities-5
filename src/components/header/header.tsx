@@ -7,7 +7,7 @@ type HeaderProps = {
   showNavigation: boolean;
 }
 
-export const Header = memo(function Header({showNavigation}: HeaderProps): JSX.Element {
+function HeaderImpl({showNavigation}: HeaderProps): JSX.Element {
   const location = useLocation();
 
   return (
@@ -27,4 +27,6 @@ export const Header = memo(function Header({showNavigation}: HeaderProps): JSX.E
       </div>
     </header>
   );
-});
+}
+
+export const Header = memo(HeaderImpl);

@@ -11,7 +11,7 @@ type OfferCardProps = {
   className: string;
 }
 
-export const OfferCard = memo(function OfferCard({offerPreview, setActiveOfferPreview, className}: OfferCardProps): JSX.Element {
+function OfferCardImpl({offerPreview, setActiveOfferPreview, className}: OfferCardProps): JSX.Element {
   const offerDescriptionUrl = `${AppRoute.Offer}/${offerPreview.id}`;
   function handleOnMouseOver() {
     if (setActiveOfferPreview) {
@@ -38,4 +38,6 @@ export const OfferCard = memo(function OfferCard({offerPreview, setActiveOfferPr
       </div>
     </article>
   );
-});
+}
+
+export const OfferCard = memo(OfferCardImpl);

@@ -9,7 +9,7 @@ type CitiesListProps = {
   cities: readonly City[];
 }
 
-export const CitiesList = memo(function CitiesList({cities}: CitiesListProps): JSX.Element {
+function CitiesListImpl({cities}: CitiesListProps): JSX.Element {
   const selectedCity = useAppSelector(getCity);
   const dispatch = useAppDispatch();
 
@@ -35,4 +35,6 @@ export const CitiesList = memo(function CitiesList({cities}: CitiesListProps): J
       </section>
     </div>
   );
-});
+}
+
+export const CitiesList = memo(CitiesListImpl);
