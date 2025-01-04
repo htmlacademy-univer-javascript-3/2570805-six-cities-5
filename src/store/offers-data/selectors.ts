@@ -22,3 +22,5 @@ export const getNearbyOffers = createSelector(
 );
 export const getReviews = (state: Pick<AppState, NameSpace.Data>) => state[NameSpace.Data].reviews;
 export const getFavorites = (state: Pick<AppState, NameSpace.Data>) => state[NameSpace.Data].favorites;
+export const getFavoritesLoadingStatus = (state: Pick<AppState, NameSpace.Data>) => state[NameSpace.Data].isFavoritesLoading;
+

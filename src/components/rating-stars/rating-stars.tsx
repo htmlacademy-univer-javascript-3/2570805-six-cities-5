@@ -5,7 +5,7 @@ type RatingStarsProps = {
 }
 
 function ratingToPercents(rating: number): string {
-  const percent = 100 * rating / 5.0;
+  const percent = 100 * Math.round(rating) / 5.0;
   return `${percent}%`;
 }
 

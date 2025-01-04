@@ -2,6 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 import {NameSpace} from '../../consts/consts.ts';
 import {OffersData} from '../../types/state.ts';
 import {
+  editFavoriteStatusAction,
   fetchFavoritesAction,
   fetchNearbyOffersAction, fetchOfferDescriptionAction,
   fetchOfferPreviewsAction,
@@ -64,6 +65,27 @@ export const offersData = createSlice({
       })
       .addCase(fetchFavoritesAction.rejected, (state) => {
         state.isFavoritesLoading = false;
+      })
+      .addCase(editFavoriteStatusAction.fulfilled, (state, action) => {
+        const offer = action.payload;
+        const actualOffer = state.offerPreviews.find((o) => o.id === offer.id);
+        if (actualOffer) {
+          actualOffer.isFavorite = offer.isFavorite;
+        }
+        const actualNearby = state.nearbyOffers.find((o) => o.id === offer.id);
+        if (actualNearby) {
+          actualNearby.isFavorite = offer.isFavorite;
+        }
+        const actualFavorite = state.favorites.find((f) => f.id === offer.id);
+        if (offer.isFavorite && !actualFavorite) {
+          state.favorites.push(offer);
+        }
+        if (!offer.isFavorite && actualFavorite) {
+          state.favorites = state.favorites.filter((f) => f.id !== offer.id);
+        }
+        if (state.offerDescription && state.offerDescription.id === offer.id) {
+          state.offerDescription.isFavorite = offer.isFavorite;
+        }
       });
   }
 });

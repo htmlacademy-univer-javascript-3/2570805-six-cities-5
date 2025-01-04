@@ -23,7 +23,8 @@ export enum APIRoute {
   Reviews = '/comments/{offerId}',
   Login = '/login',
   Logout = '/logout',
-  Favorite = '/favorite'
+  Favorite = '/favorite',
+  FavoriteEdit = '/favorite/{offerId}/{status}',
 }
 
 export const MIN_REVIEW_LENGTH = 50;
@@ -32,6 +33,8 @@ export const MAX_REVIEW_LENGTH = 300;
 export const MAX_REVIEWS_COUNT = 10;
 
 export const MAX_NEARBY_OFFERS = 3;
+
+export const MAX_IMAGES_COUNT = 6;
 
 export enum OfferMarker {
   Default = 'img/pin.svg',

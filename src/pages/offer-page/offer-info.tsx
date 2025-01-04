@@ -2,13 +2,14 @@ import {memo} from 'react';
 import {PremiumMark} from '../../components/premium-mark/premium-mark.tsx';
 import {RatingStars} from '../../components/rating-stars/rating-stars.tsx';
 import {GetWordInCorrectNumber} from '../../services/common.ts';
-import {AuthorizationStatus} from '../../consts/consts.ts';
+import {AuthorizationStatus, MAX_IMAGES_COUNT} from '../../consts/consts.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {OfferDescription} from '../../types/offer.ts';
 import {OfferReviewsList} from './offer-reviews-list.tsx';
 import {OfferReviewForm} from './offer-review-form.tsx';
 import {getReviews} from '../../store/offers-data/selectors.ts';
 import {getAuthorizationStatus} from '../../store/user-process/selectors.ts';
+import {BookmarkButton} from '../../components/bookmark-button/bookmark-button.tsx';
 
 type OfferInfoProps = {
   offerDescription: OfferDescription;
@@ -22,7 +23,7 @@ function OfferInfoImpl({offerDescription}: OfferInfoProps): JSX.Element {
     <>
       <div className="offer__gallery-container container">
         <div className="offer__gallery">
-          {offerDescription.images.map((image) => (
+          {offerDescription.images.slice(0, MAX_IMAGES_COUNT).map((image) => (
             <div key={image} className="offer__image-wrapper">
               <img className="offer__image" src={image} alt="Photo studio"/>
             </div>
@@ -36,12 +37,13 @@ function OfferInfoImpl({offerDescription}: OfferInfoProps): JSX.Element {
             <h1 className="offer__name">
               {offerDescription.title}
             </h1>
-            <button className="offer__bookmark-button button" type="button">
-              <svg className="offer__bookmark-icon" width="31" height="33">
-                <use xlinkHref="#icon-bookmark"></use>
-              </svg>
-              <span className="visually-hidden">To bookmarks</span>
-            </button>
+            <BookmarkButton
+              id={offerDescription.id}
+              isFavorite={offerDescription.isFavorite}
+              className={'offer'}
+              width={31}
+              height={33}
+            />
           </div>
           <RatingStars rating={offerDescription.rating} className="offer" showRatingValue/>
           <ul className="offer__features">

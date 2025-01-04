@@ -5,10 +5,12 @@ import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
 import {logoutAction} from '../../store/api-actions.ts';
 import React, {memo} from 'react';
 import {getAuthorizationStatus, getCurrentUser} from '../../store/user-process/selectors.ts';
+import {getFavorites} from '../../store/offers-data/selectors.ts';
 
 function HeaderNavigationImpl(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const currentUser = useAppSelector(getCurrentUser);
+  const favorites = useAppSelector(getFavorites);
   const dispatch = useAppDispatch();
 
   function handleSignOut(evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
@@ -26,7 +28,7 @@ function HeaderNavigationImpl(): JSX.Element {
                 <img className='user__avatar' src={currentUser!.avatarUrl} />
               </div>
               <span className="header__user-name user__name">{currentUser!.email}</span>
-              <span className="header__favorite-count">3</span>
+              <span className="header__favorite-count">{favorites.length}</span>
             </Link>
           </li>
           <li className="header__nav-item">
