@@ -1,14 +1,16 @@
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
 import {City} from '../../types/city.ts';
-import {changeCityAction} from '../../store/action.ts';
+import {memo} from 'react';
+import {changeCityAction} from '../../store/options-process/options-process.ts';
+import {getCity} from '../../store/options-process/selectors.ts';
 
 type CitiesListProps = {
   cities: readonly City[];
 }
 
-export function CitiesList({cities}: CitiesListProps): JSX.Element {
-  const selectedCity = useAppSelector((state) => state.city);
+function CitiesListImpl({cities}: CitiesListProps): JSX.Element {
+  const selectedCity = useAppSelector(getCity);
   const dispatch = useAppDispatch();
 
   function handleOnCityClick(city: City) {
@@ -34,3 +36,5 @@ export function CitiesList({cities}: CitiesListProps): JSX.Element {
     </div>
   );
 }
+
+export const CitiesList = memo(CitiesListImpl);

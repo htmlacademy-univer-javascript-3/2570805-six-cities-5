@@ -1,12 +1,11 @@
-import {OfferPreview} from '../../types/offer.ts';
 import {FavoritesList} from './favorites-list.tsx';
 import {Header} from '../../components/header/header.tsx';
+import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import {getFavorites} from '../../store/offers-data/selectors.ts';
 
-type FavoritesPageProps = {
-  favorites: OfferPreview[];
-}
+export function FavoritesPage(): JSX.Element {
+  const favorites = useAppSelector(getFavorites);
 
-export function FavoritesPage({favorites}: FavoritesPageProps): JSX.Element {
   return (
     <div className="page">
       <Header showNavigation/>

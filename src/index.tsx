@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import {App} from './components/app/app.tsx';
-import {FAVORITES_MOCK} from './mocks/mocks.ts';
 import {Provider} from 'react-redux';
 import {store} from './store';
 import {checkAuthAction, fetchOfferPreviewsAction} from './store/api-actions.ts';
@@ -19,7 +18,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ToastContainer/>
-      <App favorites={FAVORITES_MOCK}/>
+      <App/>
     </Provider>
   </React.StrictMode>
 );

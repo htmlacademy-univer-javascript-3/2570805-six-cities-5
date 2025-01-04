@@ -1,12 +1,13 @@
 import {Link, useLocation} from 'react-router-dom';
 import {AppRoute} from '../../consts/consts.ts';
 import {HeaderNavigation} from './header-navigation.tsx';
+import {memo} from 'react';
 
 type HeaderProps = {
   showNavigation: boolean;
 }
 
-export function Header({showNavigation}: HeaderProps): JSX.Element {
+function HeaderImpl({showNavigation}: HeaderProps): JSX.Element {
   const location = useLocation();
 
   return (
@@ -27,3 +28,5 @@ export function Header({showNavigation}: HeaderProps): JSX.Element {
     </header>
   );
 }
+
+export const Header = memo(HeaderImpl);

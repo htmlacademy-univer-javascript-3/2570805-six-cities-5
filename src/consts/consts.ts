@@ -23,15 +23,22 @@ export enum APIRoute {
   Reviews = '/comments/{offerId}',
   Login = '/login',
   Logout = '/logout',
+  Favorite = '/favorite'
 }
 
 export const MIN_REVIEW_LENGTH = 50;
 export const MAX_REVIEW_LENGTH = 300;
 
-export const URL_MARKER_DEFAULT = 'img/pin.svg';
-export const URL_MARKER_CURRENT = 'img/pin-active.svg';
+export const MAX_REVIEWS_COUNT = 10;
 
-export const OFFERS_SORTING_OPTIONS: SortingOption<OfferBase>[] = [
+export const MAX_NEARBY_OFFERS = 3;
+
+export enum OfferMarker {
+  Default = 'img/pin.svg',
+  Current = 'img/pin-active.svg'
+}
+
+export const OFFERS_SORTING_OPTIONS: readonly SortingOption<OfferBase>[] = [
   {
     name: 'Popular',
     compareFn: () => 0
@@ -48,4 +55,10 @@ export const OFFERS_SORTING_OPTIONS: SortingOption<OfferBase>[] = [
     name: 'Top rated first',
     compareFn: (a, b) => b.rating - a.rating
   },
-];
+] as const;
+
+export enum NameSpace {
+  Data = 'DATA',
+  User = 'USER',
+  Options = 'Options',
+}

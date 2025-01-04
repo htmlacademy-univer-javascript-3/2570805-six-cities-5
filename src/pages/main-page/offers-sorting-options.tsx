@@ -1,14 +1,15 @@
-import {useState} from 'react';
+import {memo, useState} from 'react';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {OFFERS_SORTING_OPTIONS} from '../../consts/consts.ts';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
-import {changeSortingOptionAction} from '../../store/action.ts';
 import {SortingOption} from '../../types/sorting-option.ts';
 import {OfferBase} from '../../types/offer.ts';
+import {changeSortingOptionAction} from '../../store/options-process/options-process.ts';
+import {getSortingOption} from '../../store/options-process/selectors.ts';
 
-export function OffersSortingOptions(): JSX.Element {
+function OffersSortingOptionsImpl(): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const selectedSortingOption = useAppSelector((state) => state.sortingOption);
+  const selectedSortingOption = useAppSelector(getSortingOption);
   const dispatch = useAppDispatch();
 
   function handleOnOpenClick() {
@@ -45,3 +46,5 @@ export function OffersSortingOptions(): JSX.Element {
     </form>
   );
 }
+
+export const OffersSortingOptions = memo(OffersSortingOptionsImpl);

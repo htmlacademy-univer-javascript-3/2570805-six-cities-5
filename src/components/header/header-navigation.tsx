@@ -3,11 +3,12 @@ import {AppRoute, AuthorizationStatus} from '../../consts/consts.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
 import {logoutAction} from '../../store/api-actions.ts';
-import React from 'react';
+import React, {memo} from 'react';
+import {getAuthorizationStatus, getCurrentUser} from '../../store/user-process/selectors.ts';
 
-export function HeaderNavigation(): JSX.Element {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const currentUser = useAppSelector((state) => state.currentUser);
+function HeaderNavigationImpl(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const currentUser = useAppSelector(getCurrentUser);
   const dispatch = useAppDispatch();
 
   function handleSignOut(evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
@@ -52,3 +53,5 @@ export function HeaderNavigation(): JSX.Element {
     </nav>
   );
 }
+
+export const HeaderNavigation = memo(HeaderNavigationImpl);

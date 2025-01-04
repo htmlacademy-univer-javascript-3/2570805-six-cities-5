@@ -3,6 +3,7 @@ import {PremiumMark} from '../premium-mark/premium-mark.tsx';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../consts/consts.ts';
 import {OfferPreviewInfo} from '../offer-preview-info/offer-preview-info.tsx';
+import {memo} from 'react';
 
 type OfferCardProps = {
   offerPreview: OfferPreview;
@@ -10,7 +11,7 @@ type OfferCardProps = {
   className: string;
 }
 
-export function OfferCard({offerPreview, setActiveOfferPreview, className}: OfferCardProps): JSX.Element {
+function OfferCardImpl({offerPreview, setActiveOfferPreview, className}: OfferCardProps): JSX.Element {
   const offerDescriptionUrl = `${AppRoute.Offer}/${offerPreview.id}`;
   function handleOnMouseOver() {
     if (setActiveOfferPreview) {
@@ -38,3 +39,5 @@ export function OfferCard({offerPreview, setActiveOfferPreview, className}: Offe
     </article>
   );
 }
+
+export const OfferCard = memo(OfferCardImpl);
