@@ -9,6 +9,7 @@ import {Header} from '../../components/header/header.tsx';
 import {Spinner} from '../../components/spinner/spinner.tsx';
 import {getCity} from '../../store/options-process/selectors.ts';
 import {getOfferPreviews, getOfferPreviewsLoadingStatus} from '../../store/offers-data/selectors.ts';
+import {MainPageEmpty} from './main-page-empty.tsx';
 
 export function MainPage(): JSX.Element {
   const isLoading = useAppSelector(getOfferPreviewsLoadingStatus);
@@ -19,6 +20,12 @@ export function MainPage(): JSX.Element {
   if (isLoading) {
     return (
       <Spinner/>
+    );
+  }
+
+  if (!offerPreviews || offerPreviews.length === 0) {
+    return (
+      <MainPageEmpty cityName={city.name}/>
     );
   }
 
