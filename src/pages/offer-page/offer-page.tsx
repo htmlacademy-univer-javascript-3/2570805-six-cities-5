@@ -39,7 +39,7 @@ export function OfferPage(): JSX.Element {
         <section className="offer">
           <OfferInfo offerDescription={offerDescription}/>
           <section className="offer__map map" style={{height: '550px', width: '1144px', marginLeft: 'auto', marginRight: 'auto'}}>
-            <Map city={nearbyOfferPreviews[0].city} offers={[...nearbyOfferPreviews, offerDescription]} activeOfferPreviewId={offerDescription.id}/>
+            <Map city={offerDescription.city} offers={[...nearbyOfferPreviews, offerDescription]} activeOfferPreviewId={offerDescription.id}/>
           </section>
         </section>
         <div className="container">

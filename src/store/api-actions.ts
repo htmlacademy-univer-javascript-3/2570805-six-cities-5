@@ -66,9 +66,10 @@ export const fetchOfferDescriptionAction = createAsyncThunk<OfferDescription | n
   'data/fetchOfferDescription',
   async (offerId, {dispatch, extra: api}) => {
     try {
-      dispatch(fetchNearbyOffersAction(offerId));
-      dispatch(fetchReviewsAction(offerId));
+      const fetchNearby = dispatch(fetchNearbyOffersAction(offerId));
+      const fetchReviews = dispatch(fetchReviewsAction(offerId));
       const {data} = await api.get<OfferDescription>(APIRoute.SpecificOffer.replace('{offerId}', offerId));
+      await Promise.all([fetchNearby, fetchReviews]);
       return data;
     } catch (error) {
       dispatch(redirectToRouteAction(AppRoute.NotFound));

@@ -4,6 +4,8 @@ import {City} from '../../types/city.ts';
 import {memo} from 'react';
 import {changeCityAction} from '../../store/options-process/options-process.ts';
 import {getCity} from '../../store/options-process/selectors.ts';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../consts/consts.ts';
 
 type CitiesListProps = {
   cities: readonly City[];
@@ -23,12 +25,16 @@ function CitiesListImpl({cities}: CitiesListProps): JSX.Element {
         <ul className="locations__list tabs__list">
           {cities.map((city) => (
             <li className="locations__item" key={city.name}>
-              <a
+              <Link
                 className={`locations__item-link tabs__item ${selectedCity === city ? 'tabs__item--active' : ''}`}
-                onClick={() => handleOnCityClick(city)}
+                to={AppRoute.Root}
+                onClick={(evt) => {
+                  evt.preventDefault();
+                  handleOnCityClick(city);
+                }}
               >
                 <span>{city.name}</span>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

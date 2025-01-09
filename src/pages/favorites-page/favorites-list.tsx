@@ -1,5 +1,10 @@
 import {OfferPreview} from '../../types/offer.ts';
 import {FavoriteCard} from './favorite-card.tsx';
+import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
+import {changeCityAction} from '../../store/options-process/options-process.ts';
+import {CITIES} from '../../consts/cities.ts';
+import {Link} from 'react-router-dom';
+import {AppRoute} from '../../consts/consts.ts';
 
 type FavoritesListProps = {
   favorites: OfferPreview[];
@@ -19,7 +24,12 @@ function getFavoritesByCity(favorites: OfferPreview[]) {
 }
 
 export function FavoritesList({favorites}: FavoritesListProps) {
+  const dispatch = useAppDispatch();
   const favoritesByCity = getFavoritesByCity(favorites);
+
+  function handleCityClick(city: string) {
+    dispatch(changeCityAction(CITIES.find((c) => c.name === city)!));
+  }
 
   return (
     <ul className="favorites__list">
@@ -27,9 +37,9 @@ export function FavoritesList({favorites}: FavoritesListProps) {
         <li key={city} className="favorites__locations-items">
           <div className="favorites__locations locations locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
+              <Link className="locations__item-link" to={AppRoute.Root} onClick={() => handleCityClick(city)}>
                 <span>{city}</span>
-              </a>
+              </Link>
             </div>
           </div>
           <div className="favorites__places">
