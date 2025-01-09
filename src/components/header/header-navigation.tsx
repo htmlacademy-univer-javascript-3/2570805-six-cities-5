@@ -32,9 +32,13 @@ function HeaderNavigationImpl(): JSX.Element {
             </Link>
           </li>
           <li className="header__nav-item">
-            <a className="header__nav-link" onClick={(evt) => handleSignOut(evt)}>
+            <Link
+              className="header__nav-link"
+              to={AppRoute.Root}
+              onClick={handleSignOut}
+            >
               <span className="header__signout">Sign out</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
